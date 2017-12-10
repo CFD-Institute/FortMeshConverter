@@ -15,7 +15,7 @@ program Gmsh_to_VTK
 
     call write_mesh_vtk
 
-
+    call write_mesh_tecplot 
 
 end program Gmsh_to_VTK
 
