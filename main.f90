@@ -8,6 +8,8 @@ program Gmsh_to_VTK
 
 
     call read_mesh
+    
+    call construct_id_nodes 
 
     call construct_cells
 
