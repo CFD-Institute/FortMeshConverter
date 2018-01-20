@@ -98,6 +98,11 @@ module mod_read_gmsh
                 nbelm = nbelm + 1
             case (15) ! 1-node point.
                 allocate(id_nodes_msh(i)%pn%id_node(1:6))
+            case (37) ! 5-node edge quadrangle.
+                allocate(id_nodes_msh(i)%pn%id_node(1:30))
+                nbelm = nbelm + 1
+            case (27) ! boundary 5-node edge.
+                allocate(id_nodes_msh(i)%pn%id_node(1:10))
             case default
                 print*,'comming soon !'
                 stop
@@ -129,7 +134,15 @@ module mod_read_gmsh
        allocate(id_nodes(1:nbelm))
        do i = 1, nbelm
            allocate(id_nodes(i)%pn)
-           allocate(id_nodes(i)%pn%id_node(1:9))
+           
+           if (id_nodes_msh(i)%pn%elem_typ == 3) then
+                allocate(id_nodes(i)%pn%id_node(1:9))
+           endif
+           
+           if (id_nodes_msh(i)%pn%elem_typ == 37) then
+                allocate(id_nodes(i)%pn%id_node(1:30))
+           endif
+           
        enddo 
        
        j = 0
@@ -138,6 +151,11 @@ module mod_read_gmsh
                j = j + 1
                id_nodes(j)%pn%id_node(:) = id_nodes_msh(i)%pn%id_node(:)
            endif 
+           
+           if (id_nodes_msh(i)%pn%elem_typ == 37) then
+               j = j + 1
+               id_nodes(j)%pn%id_node(:) = id_nodes_msh(i)%pn%id_node(:)
+           endif
        enddo 
        
        end subroutine
