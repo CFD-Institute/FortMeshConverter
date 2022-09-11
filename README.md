@@ -1,4 +1,4 @@
-# gmsh-to-vtk
+# FortMeshConverter (former name: gmsh-to-vtk)
 - Convert .msh mesh file (Quadrilateral) of gmsh to .vtk file.
 - Written in modern Fortran.
 - Compact (532 lines of code).
